@@ -1,0 +1,16 @@
+version: "3.3"
+services:
+  web:
+    image: web:latest
+    build: .
+    ports:
+      - "80:80"
+    command: python3 manage.py runserver 0.0.0.0:80
+    volumes:
+      - .:/code
+#  vlc:
+#    image: galexrt/vlc:latest
+#    build: .
+#    ports:
+#      - "9911:9911"
+#    command: vlc -vvv -Idummy rtsp://<user>:<pass>@192.168.1.199:8554/streaming/channels/201 --sout-transcode-venc=ffmpeg{strict=1} --sout-transcode-vcodec=MJPG --sout-transcode-fps=10 --sout-transcode-width=640 --sout-transcode-height=360 --sout-standard-access=http --sout-standard-mux=mpjpeg --sout-standard-dst=:9911/
