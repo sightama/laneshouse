@@ -1,6 +1,13 @@
 # L&GInn / Laneshouse / Gracehouse
 ###Python Django LTS PoE Camera Live Stream Framework Example project
+
 This simple django project uses html img tags and local RTSP stream feeds being converted to MJPEG via VLC to broadcast (in this example) 4 PoE Cameras hooked up to an LTS security DVR system. Fun side project why not broadcast to the world WCGW?
+
+![alt text](https://github.com/[username]/[reponame]/blob/main/laneshouse/static/images/example.jpg?raw=true)
+
+
+
+
 ## Running the server
 Prereq:
   - Windows (RIP) - You could do it with linux but I won't support you trying to create the vlc command.
