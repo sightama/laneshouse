@@ -1,5 +1,6 @@
 # L&GInn / Laneshouse / Gracehouse
-###Python Django LTS PoE Camera Live Stream Framework Example project
+
+##Python Django LTS PoE Camera Live Stream Framework Example project
 
 This simple django project uses html img tags and local RTSP stream feeds being converted to MJPEG via VLC to broadcast (in this example) 4 PoE Cameras hooked up to an LTS security DVR system. Fun side project why not broadcast to the world WCGW?
 
@@ -23,10 +24,10 @@ Prereq:
 Now the server is operating and serves 4 html img tags linking to locally run RTSP streams. Let's set those up
 4. Open up 1+ windows (not wsl) cmd tabs to run below commands to instantiate feeds; They are accessible on their ports @ localhost or via external IP addr
 ```
-start vlc -vvv -Idummy rtsp://admin:lane2adam@192.168.1.199:8554/streaming/channels/101 --sout #transcode{vcodec=MJPG,venc=,fps=10,width=640,height=360}:standard{access=http{mime=multipart/x-mixed-replace;boundary=--7b3cc56e5f51db803f790dad720ed50a},mux=mpjpeg,dst=:9911/}
-start vlc -vvv -Idummy rtsp://admin:lane2adam@192.168.1.199:8554/streaming/channels/201 --sout #transcode{vcodec=MJPG,venc=,fps=10,width=640,height=360}:standard{access=http{mime=multipart/x-mixed-replace;boundary=--7b3cc56e5f51db803f790dad720ed50a},mux=mpjpeg,dst=:9912/}
-start vlc -vvv -Idummy rtsp://admin:lane2adam@192.168.1.199:8554/streaming/channels/301 --sout #transcode{vcodec=MJPG,venc=,fps=10,width=640,height=360}:standard{access=http{mime=multipart/x-mixed-replace;boundary=--7b3cc56e5f51db803f790dad720ed50a},mux=mpjpeg,dst=:9913/}
-start vlc -vvv -Idummy rtsp://admin:lane2adam@192.168.1.199:8554/streaming/channels/401 --sout #transcode{vcodec=MJPG,venc=,fps=10,width=640,height=360}:standard{access=http{mime=multipart/x-mixed-replace;boundary=--7b3cc56e5f51db803f790dad720ed50a},mux=mpjpeg,dst=:9914/}
+start vlc -vvv -Idummy rtsp://<dvruser>:<pass>@192.168.1.199:8554/streaming/channels/101 --sout #transcode{vcodec=MJPG,venc=,fps=10,width=640,height=360}:standard{access=http{mime=multipart/x-mixed-replace;boundary=--7b3cc56e5f51db803f790dad720ed50a},mux=mpjpeg,dst=:9911/}
+start vlc -vvv -Idummy rtsp://<dvruser>:<pass>@192.168.1.199:8554/streaming/channels/201 --sout #transcode{vcodec=MJPG,venc=,fps=10,width=640,height=360}:standard{access=http{mime=multipart/x-mixed-replace;boundary=--7b3cc56e5f51db803f790dad720ed50a},mux=mpjpeg,dst=:9912/}
+start vlc -vvv -Idummy rtsp://<dvruser>:<pass>@192.168.1.199:8554/streaming/channels/301 --sout #transcode{vcodec=MJPG,venc=,fps=10,width=640,height=360}:standard{access=http{mime=multipart/x-mixed-replace;boundary=--7b3cc56e5f51db803f790dad720ed50a},mux=mpjpeg,dst=:9913/}
+start vlc -vvv -Idummy rtsp://<dvruser>:<pass>@192.168.1.199:8554/streaming/channels/401 --sout #transcode{vcodec=MJPG,venc=,fps=10,width=640,height=360}:standard{access=http{mime=multipart/x-mixed-replace;boundary=--7b3cc56e5f51db803f790dad720ed50a},mux=mpjpeg,dst=:9914/}
 ```
 
 ## Killing the server
@@ -41,13 +42,13 @@ killall -9 VLC
   - Public server IP = 73.138.53.30
   - LTS RTSP Stream link working examples (03072023)
     - BACK PATIO
-      - rtsp://admin:lane2adam@192.168.1.199:8554/streaming/channels/101
+      - rtsp://<user>:<pass>@192.168.1.199:8554/streaming/channels/101
     - FRONT NIGHT VISION
-      - rtsp://admin:lane2adam@192.168.1.199:8554/streaming/channels/201
+      - rtsp://<user>:<pass>@192.168.1.199:8554/streaming/channels/201
     - YARD
-      - rtsp://admin:lane2adam@192.168.1.199:8554/streaming/channels/301
+      - rtsp://<user>:<pass>@192.168.1.199:8554/streaming/channels/301
     - CATS
-      - rtsp://admin:lane2adam@192.168.1.199:8554/streaming/channels/401
+      - rtsp://<user>:<pass>@192.168.1.199:8554/streaming/channels/401
 
 ### Troubleshooting/Useful Links
   - LTS streams op: https://ltsecurityinc.zendesk.com/hc/en-us/articles/360005417193-HTTP-RTSP-MJPEG-Links
@@ -56,5 +57,5 @@ killall -9 VLC
 
 Note: I tried getting the above commands to run in a linux docker container and came up with this run statement before I gave up.If you wanna pick up where I left off and make a PR you're more than welcome to:
 ```
-vlc -vvv -Idummy rtsp://admin:lane2adam@192.168.1.199:8554/streaming/channels/201 --sout-transcode-venc=ffmpeg{strict=1} --sout-transcode-vcodec=MJPG --sout-transcode-fps=10 --sout-transcode-width=640 --sout-transcode-height=360 --sout-standard-access=http --sout-standard-mux=mpjpeg --sout-standard-dst=:9911/
+vlc -vvv -Idummy rtsp://<user>:<pass>@192.168.1.199:8554/streaming/channels/201 --sout-transcode-venc=ffmpeg{strict=1} --sout-transcode-vcodec=MJPG --sout-transcode-fps=10 --sout-transcode-width=640 --sout-transcode-height=360 --sout-standard-access=http --sout-standard-mux=mpjpeg --sout-standard-dst=:9911/
 ```
