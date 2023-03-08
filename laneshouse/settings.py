@@ -120,14 +120,10 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
-STATICFILES_DIRS = (
-  os.path.join(SITE_ROOT, 'static/'),
-  os.path.join(SITE_ROOT, 'laneshouse/static/'),
-)
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'), )
 
 STREAMSOURCE_DIR = '/static/source'
 CHUNK_DELAY = 0.05
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
