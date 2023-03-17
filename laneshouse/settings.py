@@ -12,6 +12,24 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 import os
 from pathlib import Path
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+        'file': {
+            'class': 'logging.FileHandler',
+            'filename': 'logfile.txt',
+        },
+    },
+    'root': {
+        'handlers': ['console', 'file'],
+        'level': 'INFO',
+    },
+}
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,13 +38,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-m3*sr_2wi83mtc2&hl#bi*$b1p1v(w#yj=zb_u_m@wvmvu!9ta'
+SECRET_KEY = os.getenv('SECRET_KEY', 'pranked-bruh')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 HOST_EXTERNAL_IP = os.getenv('HOST_EXTERNAL_IP', 'localhost')
-ALLOWED_HOSTS = [HOST_EXTERNAL_IP, '*']
+ALLOWED_HOSTS = ['theburtrums.com', 'www.theburtrums.com', '*']  # HOST_EXTERNAL_IP - guaranteed IP's works.
 
 
 # Application definition
@@ -38,10 +56,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'laneshouse'
+    'corsheaders',
+    'laneshouse',
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -82,6 +102,17 @@ DATABASES = {
     }
 }
 
+# CORS_ALLOWED_ORIGINS = [
+#     "http://73.138.53.30:9911",
+#     "http://73.138.53.30:9912",
+#     "http://73.138.53.30:9913",
+#     "http://73.138.53.30:9914",
+#     "http://localhost:9911",
+#     "http://localhost:9912",
+#     "http://localhost:9913",
+#     "http://localhost:9914",
+# ]
+CORS_ALLOW_ALL_ORIGINS = True
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -120,14 +151,10 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
-STATICFILES_DIRS = (
-  os.path.join(SITE_ROOT, 'static/'),
-  os.path.join(SITE_ROOT, 'laneshouse/static/'),
-)
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'), )
 
 STREAMSOURCE_DIR = '/static/source'
 CHUNK_DELAY = 0.05
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
