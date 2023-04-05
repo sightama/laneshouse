@@ -31,7 +31,7 @@ start vlc -vvv -Idummy rtsp://<dvruser>:<pass>@192.168.1.199:8554/streaming/chan
 ```
 
 ## Killing the server
-1. Press Ctrl + C o nthe docker compose window
+1. Press Ctrl + C on the docker compose window
 2. Type this into windows terminal:
 ```
 killall -9 VLC
